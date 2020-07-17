@@ -3,15 +3,15 @@
 	"displayName": "Re:VIEW Starter Syntax Highlight",
 	"description": "Syntax Highlights for Re:VIEW Starter.",
 	"publisher": "yuqquu",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/yuqquu/review-starter-syntax-highlight.git"
 	},
 	"icon": "images/icon.png",
 	"galleryBanner": {
-		"color": "#cc3025",
-		"theme": "dark"
+		"color": "#f0f0f0",
+		"theme": "light"
 	},
 	"license": "MIT",
 	"engines": {
