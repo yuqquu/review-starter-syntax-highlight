@@ -1,0 +1,45 @@
+{
+	"name": "review-starter-syntax-highlight",
+	"displayName": "Re:VIEW Starter Syntax Highlight",
+	"description": "Syntax Highlight for Re:VIEW Starter.",
+	"publisher": "yuqquu",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yuqquu/review-starter-syntax-highlight.git"
+	},
+	"icon": "images/icon.png",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.45.0"
+	},
+	"main": "./extension.js",
+	"activationEvents": [
+		"*"
+	],
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "review-starter",
+				"aliases": [
+					"Re:VIEW Starter",
+					"review-starter"
+				],
+				"extensions": [
+					".re"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "review-starter",
+				"scopeName": "source.re",
+				"path": "./syntaxes/review-starter.tmLanguage.json"
+			}
+		]
+	}
+}

@@ -1,0 +1,450 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Re:VIEW Starter",
+	"patterns": [
+		{
+			"comment": "BUG: ブロック命令の内側でリスト命令が有効になっている。"
+		},
+		{
+			"comment": "TODO: 参照系に変数の色を付ける。"
+		},
+		{
+			"include": "#escape_character"
+		},
+		{
+			"include": "#inline_method",
+			"comment": "inline_keywords をここの patterns に入れないことで、グローバルに着色させずに済む"
+		},
+		{
+			"include": "#block_method"
+		},
+		{
+			"include": "#singleline_method"
+		},
+		{
+			"include": "#comments"
+		}
+	],
+	"repository": {
+		"escape_character": {
+			"comment": "エスケープ記号",
+			"match": "(\\\\)(\\}|\\])",
+			"captures": {
+				"1": {"name": "constant.character.escape.review-starter"}
+			}
+		},
+		"inline_method": {
+			"comment": "入れ子に対応。",
+			"patterns": [
+				{
+					"comment": "インライン数式1 @<m>{yyy}",
+					"name": "entity.name.type",
+					"begin": "(@<)(m)(>\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"end": "(\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン数式2 @<m>$yyy$  なお、@<B>$￥$$は無効",
+					"name": "entity.name.type",
+					"begin": "(@<)(m)(>\\$)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"end": "(\\$)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン数式3 @<m>|yyy|  なお、@<B>|￥||は無効",
+					"name": "entity.name.type",
+					"begin": "(@<)(m)(>\\|)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"end": "(\\|)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン命令全般1 @<xxx>{yyy}",
+					"begin": "(@<)([^>]+)(>\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"match": "."}],
+					"end": "(\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン命令全般2 @<xxx>$yyy$",
+					"begin": "(@<)([^>]+)(>\\$)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"match": "."}],
+					"end": "(\\$)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン命令全般3 @<xxx>|yyy|",
+					"begin": "(@<)([^>]+)(>\\|)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"match": "."}],
+					"end": "(\\|)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				}
+			]
+		},
+		"inline_keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control",
+					"match": "\\b(nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
+				},
+				{
+					"comment": "ここは参照系",
+					"name": "variable",
+					"match": "\\b(list|hd|fn|img|eq|chapref|chap|title|secref|noteref|column|w|wb|bib|idx|hidx)\\b"
+				}
+			]
+		},
+		"block_method": {
+			"comment": "ブロック命令の順番には意味がある。オプションの中にインライン命令があったときに正しく動くようにするため。",
+			"patterns": [
+				{
+					"comment": "sampleoutputbegin/sampleoutputend 命令 (オプションあり)",
+					"begin": "^(//)(sampleoutputbegin)(\\[)(.*)(\\])",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string"},
+						"5": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//)(sampleoutputend)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]}
+					}
+				},
+				{
+					"comment": "sampleoutputbegin/sampleoutputend 命令 (オプションなし)",
+					"begin": "^(//)(sampleoutputbegin)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//)(sampleoutputend)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]}
+					}
+				},
+				{
+					"comment": "ブロック数式(オプションあり) //texequation[aaa][bbb]{ ... //}",
+					"name": "entity.name.type",
+					"begin": "^(//)(texequation\\d*)(\\[)(.*)(\\]\\[)(.*)(\\]\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string"},
+						"5": {"name": "markup.bold"},
+						"6": {"name": "string"},
+						"7": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック数式(オプションなし) //texequation{ ... //}",
+					"name": "entity.name.type",
+					"begin": "^(//)(texequation\\d*)(\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (オプションx3) //xxx[aaa][bbb][ccc]{ ... //}",
+					"begin": "^(//)(.+)(\\[)(.*)(\\]\\[)(.*)(\\]\\[)(.*)(\\]\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"},
+						"6": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"7": {"name": "markup.bold"},
+						"8": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"9": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (1行, オプションx3) //xxx[aaa][bbb][ccc]",
+					"match": "^(//)(.+)(\\[)(.*)(\\]\\[)(.*)(\\]\\[)(.*)(\\])",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"},
+						"6": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"7": {"name": "markup.bold"},
+						"8": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"9": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (オプションx2) //xxx[aaa][bbb]{ ... //}",
+					"begin": "^(//)(.+)(\\[)(.*)(\\]\\[)(.*)(\\]\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"},
+						"6": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"7": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (1行, オプションx2) //xxx[aaa][bbb]",
+					"match": "^(//)(.+)(\\[)(.*)(\\]\\[)(.*)(\\])",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"},
+						"6": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"7": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (オプションx1) //xxx[aaa]{ ... //}",
+					"begin": "^(//)(.+)(\\[)(.*)(\\]\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (1行, オプションx1) //xxx[aaa]",
+					"match": "^(//)(.+)(\\[)(.*)(\\])",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"},
+						"4": {"name": "string", "patterns": [{"include": "#inline_method"}, {"match": "."}]},
+						"5": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (オプションなし) //xxx{ ... //}",
+					"begin": "^(//)(.+)(\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"include": "#inline_method"}, {"match": "."}],
+					"end": "^(//\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "ブロック命令全般 (1行, オプションなし) //xxx",
+					"match": "^(//)(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#block_keywords"}]}
+					}
+				},
+				{
+					"comment": "コラム (ラベルあり) [column]{xxx}",
+					"begin": "^(===?\\[column\\]\\{)(.+)(\\})",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "variable"},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "#block_method"}, {"match": "."}],
+					"end": "^(===?\\[/column\\])",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "コラム (ラベルなし) [column]{xxx}",
+					"begin": "^(===?\\[column\\])",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "#block_method"}, {"match": "."}],
+					"end": "^(===?\\[/column\\])",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				}
+			]
+		},
+		"block_keywords": {
+			"patterns": [
+				{
+					"name": "markup.bold",
+					"match": "\\b(cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
+				}
+			]
+		},
+		"singleline_method": {
+			"patterns": [
+				{
+					"comment": "= 章・節・項・⽬・段・⼩段 ⾒出し [オプション]有り",
+					"match": "^(={1,6})(\\[)(\\S+)(\\])\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "markup.bold"},
+						"3": {"patterns": [{"include": "#chapter_option"}]},
+						"4": {"name": "markup.bold"},
+						"5": {"name": "markup.bold", "patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": "= 章・節・項・⽬・段・⼩段 ⾒出し {ラベル}有り",
+					"match": "^(={1,6})(\\{)(\\S+)(\\})\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "markup.bold"},
+						"3": {"name": "variable"},
+						"4": {"name": "markup.bold"},
+						"5": {"name": "markup.bold", "patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": "= 章・節・項・⽬・段・⼩段 ⾒出し",
+					"match": "^(={1,6})\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "markup.bold", "patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": ": 用語定義 (先頭の空白は入れたほうが良いが、後方互換性のためになくてもいい。文字をstring色にしようとしたけどやめた)",
+					"match": "^\\s*(:)\\s+(.*)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": " * 箇条書き (先頭の空白は必須)",
+					"match": "^\\s+(\\*+)\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": " 1. リスト (番号あり) (先頭空白は必須)",
+					"match": "^\\s+(\\d+\\.)\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				},
+				{
+					"comment": " - リスト (番号なし) (先頭空白は必須)",
+					"match": "^\\s+(-+)\\s+(.+)",
+					"captures": {
+						"1": {"name": "markup.bold"},
+						"2": {"patterns": [{"include": "#inline_method"}, {"match": "."}]}
+					}
+				}
+			]
+		},
+		"chapter_option": {
+			"patterns": [
+				{
+					"name": "string",
+					"match": "\\b(nonum|nodisp|notoc)\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line",
+					"match": "^#@#.*$"
+				},
+				{
+					"name": "comment.block",
+					"begin": "^#@\\+\\+\\+",
+					"end": "^#@---"
+				},
+				{
+					"name": "comment.block",
+					"match": "@<comment>\\{.*\\[^\\\\\\]\\}"
+				}
+			]
+		}
+	},
+	"scopeName": "source.re"
+}
