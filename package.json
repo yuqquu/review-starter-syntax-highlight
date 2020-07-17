@@ -3,7 +3,7 @@
 	"displayName": "Re:VIEW Starter Syntax Highlight",
 	"description": "Syntax Highlights for Re:VIEW Starter.",
 	"publisher": "yuqquu",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/yuqquu/review-starter-syntax-highlight.git"
