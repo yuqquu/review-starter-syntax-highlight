@@ -1,7 +1,7 @@
 {
 	"name": "review-starter-syntax-highlight",
 	"displayName": "Re:VIEW Starter Syntax Highlight",
-	"description": "Syntax Highlight for Re:VIEW Starter.",
+	"description": "Syntax Highlights for Re:VIEW Starter.",
 	"publisher": "yuqquu",
 	"version": "1.0.0",
 	"repository": {
@@ -9,6 +9,10 @@
 		"url": "https://github.com/yuqquu/review-starter-syntax-highlight.git"
 	},
 	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#cc3025",
+		"theme": "dark"
+	},
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.45.0"
