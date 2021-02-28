@@ -350,7 +350,7 @@
 			"patterns": [
 				{
 					"name": "markup.bold",
-					"match": "\\b(cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
+					"match": "\\b(talklist|talk|needvspace|vspace|desclist|desc|vspace|imgtable|cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
 				}
 			]
 		},

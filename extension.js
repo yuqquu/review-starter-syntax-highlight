@@ -13,6 +13,14 @@ class BlockMethodCompletionItemProvider {
 			return undefined;
 		}
 		const completionItems = [
+			{label: "talklist", kind: vscode.CompletionItemKind.Field},
+			{label: "talk", kind: vscode.CompletionItemKind.Field},
+			{label: "needvspace", kind: vscode.CompletionItemKind.Field},
+			{label: "vspace", kind: vscode.CompletionItemKind.Field},
+			{label: "desclist", kind: vscode.CompletionItemKind.Field},
+			{label: "desc", kind: vscode.CompletionItemKind.Field},
+			{label: "vspace", kind: vscode.CompletionItemKind.Field},
+			{label: "imgtable", kind: vscode.CompletionItemKind.Field},
 			{label: "cmd", kind: vscode.CompletionItemKind.Field},
 			{label: "makechaptitlepage", kind: vscode.CompletionItemKind.Field},
 			{label: "sampleoutputbegin", kind: vscode.CompletionItemKind.Field},
