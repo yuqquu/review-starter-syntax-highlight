@@ -13,6 +13,8 @@ class BlockMethodCompletionItemProvider {
 			return undefined;
 		}
 		const completionItems = [
+			{label: "chapterauthor", kind: vscode.CompletionItemKind.Field},
+			{label: "output", kind: vscode.CompletionItemKind.Field},
 			{label: "talklist", kind: vscode.CompletionItemKind.Field},
 			{label: "talk", kind: vscode.CompletionItemKind.Field},
 			{label: "needvspace", kind: vscode.CompletionItemKind.Field},
@@ -61,6 +63,7 @@ class BlockMethodCompletionItemProvider {
 class InlineMethodCompletionItemProvider {
 	provideCompletionItems(document, position, token) {
 		const completionItems = [
+			{label: "<par>", kind: vscode.CompletionItemKind.Field},
 			{label: "<nop>", kind: vscode.CompletionItemKind.Field},
 			{label: "<icon>", kind: vscode.CompletionItemKind.Field},
 			{label: "<comment>", kind: vscode.CompletionItemKind.Field},

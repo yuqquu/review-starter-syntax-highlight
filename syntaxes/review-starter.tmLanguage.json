@@ -126,7 +126,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control",
-					"match": "\\b(nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
+					"match": "\\b(par|nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
 				},
 				{
 					"comment": "ここは参照系",
@@ -350,7 +350,7 @@
 			"patterns": [
 				{
 					"name": "markup.bold",
-					"match": "\\b(talklist|talk|needvspace|vspace|desclist|desc|vspace|imgtable|cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
+					"match": "\\b(chapterauthor|output|talklist|talk|needvspace|vspace|desclist|desc|vspace|imgtable|cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
 				}
 			]
 		},
