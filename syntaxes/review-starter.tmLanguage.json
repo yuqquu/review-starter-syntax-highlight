@@ -37,6 +37,48 @@
 			"comment": "入れ子に対応。",
 			"patterns": [
 				{
+					"comment": "インライン用語1 @<term>{yyy} ただしインライン命令は入れ子にできない",
+					"begin": "(@<)(termnoidx|term)(>\\{)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "keyword.control"},
+						"3": {"name": "markup.bold"}
+					},
+					"end": "(\\})",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン用語2 @<term>$yyy$  なお、@<B>$￥$$は無効",
+					"begin": "(@<)(termnoidx|term)(>\\$)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "keyword.control", "patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"match": "."}],
+					"end": "(\\$)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+				{
+					"comment": "インライン用語3 @<term>|yyy|  なお、@<B>|￥||は無効",
+					"begin": "(@<)(termnoidx|term)(>\\|)",
+					"beginCaptures": {
+						"1": {"name": "markup.bold"},
+						"2": {"name": "keyword.control", "patterns": [{"include": "#inline_keywords"}]},
+						"3": {"name": "markup.bold"}
+					},
+					"patterns": [{"include": "$self"}, {"match": "."}],
+					"end": "(\\|)",
+					"endCaptures": {
+						"1": {"name": "markup.bold"}
+					}
+				},
+
+				{
 					"comment": "インライン数式1 @<m>{yyy}",
 					"name": "entity.name.type",
 					"begin": "(@<)(m)(>\\{)",
@@ -78,6 +120,7 @@
 						"1": {"name": "markup.bold"}
 					}
 				},
+
 				{
 					"comment": "インライン命令全般1 @<xxx>{yyy}",
 					"begin": "(@<)([^>]+)(>\\{)",

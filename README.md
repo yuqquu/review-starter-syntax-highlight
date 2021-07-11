@@ -12,7 +12,7 @@ Re:VIEW Starter 用のシンタックスハイライト・コード補完の VSC
 ### コード補完
 ![コード補完をしている様子](images/preview_code_completion.gif)
 
-Re:VIEW Starter の命令語を補完します。
+[Re:VIEW Starter](https://kauplan.org/reviewstarter/) の命令語を補完します。
 
 
 ### 入れ子が可能
@@ -28,9 +28,13 @@ Re:VIEW Starter の拡張であるインライン命令とブロック命令の�
 
 ## 既知の不具合
 - ブロック命令の内側でリストが有効になっている
-
+- プログラムコードやターミナルの中の `#@` から始まる行(コメントアウト)の色分けができていない
 
 ## バージョン履歴
+### 1.0.7
+- 20210709、20210709版に対応。
+  - term, termnoidx を追加。
+
 ### 1.0.6
 - 20210308版に対応。
   - chapterauthor, output を追加。
