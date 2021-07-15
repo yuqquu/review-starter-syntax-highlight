@@ -169,7 +169,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control",
-					"match": "\\b(par|nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
+					"match": "\\b(ins|par|nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
 				},
 				{
 					"comment": "ここは参照系",

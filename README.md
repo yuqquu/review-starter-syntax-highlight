@@ -1,5 +1,5 @@
 # Re:VIEW Starter Syntax Highlight
-Re:VIEW Starter 用のシンタックスハイライト・コード補完の VSCode 拡張機能です。
+[Re:VIEW Starter](https://kauplan.org/reviewstarter/) 用のシンタックスハイライト・コード補完の VSCode 拡張機能です。
 
 ![VSCODEのスクリーンショット](images/preview_top.png)
 
@@ -12,7 +12,7 @@ Re:VIEW Starter 用のシンタックスハイライト・コード補完の VSC
 ### コード補完
 ![コード補完をしている様子](images/preview_code_completion.gif)
 
-[Re:VIEW Starter](https://kauplan.org/reviewstarter/) の命令語を補完します。
+Re:VIEW Starter の命令語を補完します。
 
 
 ### 入れ子が可能
@@ -31,14 +31,18 @@ Re:VIEW Starter の拡張であるインライン命令とブロック命令の�
 - プログラムコードやターミナルの中の `#@` から始まる行(コメントアウト)の色分けができていない
 
 ## バージョン履歴
+### 1.0.8
+- 20210715版に対応。
+  - ins を追加。
+
 ### 1.0.7
-- 20210709、20210709版に対応。
+- 20210630、20210709版に対応。
   - term, termnoidx を追加。
 
 ### 1.0.6
 - 20210308版に対応。
   - chapterauthor, output を追加。
-- 追加を忘れていた20210308版の構文を追加。
+- 追加を忘れていた20210223版の構文を追加。
   - par を追加。
 
 ### 1.0.5

@@ -63,6 +63,7 @@ class BlockMethodCompletionItemProvider {
 class InlineMethodCompletionItemProvider {
 	provideCompletionItems(document, position, token) {
 		const completionItems = [
+			{label: "<ins>", kind: vscode.CompletionItemKind.Field},
 			{label: "<term>", kind: vscode.CompletionItemKind.Field},
 			{label: "<termnoidx>", kind: vscode.CompletionItemKind.Field},
 			{label: "<par>", kind: vscode.CompletionItemKind.Field},
