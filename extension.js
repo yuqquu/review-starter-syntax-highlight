@@ -29,9 +29,14 @@ class BlockMethodCompletionItemProvider {
 			{label: "sampleoutputend", kind: vscode.CompletionItemKind.Field},
 			{label: "abstract", kind: vscode.CompletionItemKind.Field},
 			{label: "list", kind: vscode.CompletionItemKind.Field},
+			{label: "listnum", kind: vscode.CompletionItemKind.Field},
+			{label: "emlist", kind: vscode.CompletionItemKind.Field},
+			{label: "emlistnum", kind: vscode.CompletionItemKind.Field},
 			{label: "terminal", kind: vscode.CompletionItemKind.Field},
 			{label: "footnote", kind: vscode.CompletionItemKind.Field},
 			{label: "image", kind: vscode.CompletionItemKind.Field},
+			{label: "numberlessimage", kind: vscode.CompletionItemKind.Field},
+			{label: "graph", kind: vscode.CompletionItemKind.Field},
 			{label: "note", kind: vscode.CompletionItemKind.Field},
 			{label: "table", kind: vscode.CompletionItemKind.Field},
 			{label: "tsize", kind: vscode.CompletionItemKind.Field},
@@ -55,6 +60,12 @@ class BlockMethodCompletionItemProvider {
 			{label: "embed", kind: vscode.CompletionItemKind.Field},
 			{label: "bibpaper", kind: vscode.CompletionItemKind.Field},
 			{label: "comment", kind: vscode.CompletionItemKind.Field},
+			{label: "program", kind: vscode.CompletionItemKind.Field},
+			{label: "source", kind: vscode.CompletionItemKind.Field},
+			{label: "lead", kind: vscode.CompletionItemKind.Field},
+			{label: "read", kind: vscode.CompletionItemKind.Field},
+			{label: "raw", kind: vscode.CompletionItemKind.Field},
+			{label: "read", kind: vscode.CompletionItemKind.Field},
 		];
 		let completionList = new vscode.CompletionList(completionItems, false);
 		return Promise.resolve(completionList);
@@ -87,6 +98,9 @@ class InlineMethodCompletionItemProvider {
 			{label: "<em>", kind: vscode.CompletionItemKind.Field},
 			{label: "<i>", kind: vscode.CompletionItemKind.Field},
 			{label: "<tt>", kind: vscode.CompletionItemKind.Field},
+			{label: "<ttb>", kind: vscode.CompletionItemKind.Field},
+			{label: "<tti>", kind: vscode.CompletionItemKind.Field},
+			{label: "<tcy>", kind: vscode.CompletionItemKind.Field},
 			{label: "<code>", kind: vscode.CompletionItemKind.Field},
 			{label: "<small>", kind: vscode.CompletionItemKind.Field},
 			{label: "<xsmall>", kind: vscode.CompletionItemKind.Field},
@@ -118,6 +132,13 @@ class InlineMethodCompletionItemProvider {
 			{label: "<bib>", kind: vscode.CompletionItemKind.Field},
 			{label: "<idx>", kind: vscode.CompletionItemKind.Field},
 			{label: "<hidx>", kind: vscode.CompletionItemKind.Field},
+			{label: "<kw>", kind: vscode.CompletionItemKind.Field},
+			{label: "<table>", kind: vscode.CompletionItemKind.Field},
+			{label: "<embed>", kind: vscode.CompletionItemKind.Field},
+			{label: "<raw>", kind: vscode.CompletionItemKind.Field},
+			{label: "<uchar>", kind: vscode.CompletionItemKind.Field},
+			{label: "<qq>", kind: vscode.CompletionItemKind.Field},
+			{label: "<W>", kind: vscode.CompletionItemKind.Field},
 		];
 		let completionList = new vscode.CompletionList(completionItems, false);
 		return Promise.resolve(completionList);
