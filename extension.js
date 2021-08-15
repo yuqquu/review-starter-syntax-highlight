@@ -65,7 +65,6 @@ class BlockMethodCompletionItemProvider {
 			{label: "lead", kind: vscode.CompletionItemKind.Field},
 			{label: "read", kind: vscode.CompletionItemKind.Field},
 			{label: "raw", kind: vscode.CompletionItemKind.Field},
-			{label: "read", kind: vscode.CompletionItemKind.Field},
 		];
 		let completionList = new vscode.CompletionList(completionItems, false);
 		return Promise.resolve(completionList);
