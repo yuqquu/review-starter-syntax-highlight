@@ -34,7 +34,7 @@
 			}
 		},
 		"inline_method": {
-			"comment": "入れ子に対応。",
+			"comment": "インライン命令の正規表現。入れ子に対応。",
 			"patterns": [
 				{
 					"comment": "インライン用語1 @<term>{yyy} ただしインライン命令は入れ子にできない",
@@ -168,18 +168,19 @@
 		"inline_keywords": {
 			"patterns": [
 				{
+					"comment": "ふつうのインライン命令の列挙",
 					"name": "keyword.control",
-					"match": "\\b(ins|par|nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor)\\b"
+					"match": "\\b(ins|par|nop|icon|comment|balloon|m|br|href|hlink|yomi|b|strong|B|bou|ami|u|del|weak|em|i|tt|code|small|xsmall|xxsmall|large|xlarge|xxlarge|file|userinput|foldhere|ruby|hearts|TeX|LaTeX|cursor|ttb|tti|kw|embed|raw|uchar|qq|W)\\b"
 				},
 				{
-					"comment": "ここは参照系",
+					"comment": "参照するタイプのインライン命令の列挙",
 					"name": "variable",
-					"match": "\\b(list|hd|fn|img|eq|chapref|chap|title|secref|noteref|column|w|wb|bib|idx|hidx)\\b"
+					"match": "\\b(list|hd|fn|img|eq|chapref|chap|title|secref|noteref|column|w|wb|bib|idx|hidx|table)\\b"
 				}
 			]
 		},
 		"block_method": {
-			"comment": "ブロック命令の順番には意味がある。オプションの中にインライン命令があったときに正しく動くようにするため。",
+			"comment": "ブロック命令とコラムの正規表現。ブロック命令の順番には意味がある。オプションの中にインライン命令があったときに正しく動くようにするため。",
 			"patterns": [
 				{
 					"comment": "sampleoutputbegin/sampleoutputend 命令 (オプションあり)",
@@ -213,7 +214,7 @@
 					}
 				},
 				{
-					"comment": "ブロック数式(オプションあり) //texequation[aaa][bbb]{ ... //}",
+					"comment": "ブロック数式(オプションあり) //texequation[aaa][bbb]{ ... //} \\d*は個人用ですが、あとで削除予定です",
 					"name": "entity.name.type",
 					"begin": "^(//)(texequation\\d*)(\\[)(.*)(\\]\\[)(.*)(\\]\\{)",
 					"beginCaptures": {
@@ -392,8 +393,9 @@
 		"block_keywords": {
 			"patterns": [
 				{
+					"comment": "ブロック命令の列挙",
 					"name": "markup.bold",
-					"match": "\\b(chapterauthor|output|talklist|talk|needvspace|vspace|desclist|desc|vspace|imgtable|cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment)\\b"
+					"match": "\\b(chapterauthor|output|talklist|talk|needvspace|vspace|desclist|desc|vspace|imgtable|cmd|makechaptitlepage|sampleoutputbegin|sampleoutputend|abstract|list|terminal|footnote|image|note|table|tsize|texequation|texequation2|noindent|blankline|paragraphend|memo|tip|info|warning|important|caution|notice|indepimage|sideimage|quote|clearpage|flushright|centering|embed|bibpaper|comment|listnum|emlist|emlistnum|numberlessimage|graph|program|source|lead|read|raw)\\b"
 				}
 			]
 		},
